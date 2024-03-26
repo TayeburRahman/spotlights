@@ -119,12 +119,58 @@ td {
   padding: 7px 20px;
 }
 
+.animate-this {
+  opacity: 1;
+  transition: opacity 100s ease-in-out;
+}
+
+.css-1ujsas3,
+.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  padding: 120px auto !important;
+  color: black !important;
+  font-weight: 600 !important;
+  font-family: "kingkong" !important;
+  text-transform: capitalize !important;
+  font-size: 17px !important;
+  border-radius: 15px !important;
+  padding: 3px 3px !important;
+}
+.css-1km1ehz,
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+  padding: 8px 8px !important;
+}
+.css-fvipm8,
+.css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+  border-color: white !important;
+  height: 50px !important;
+  border-radius: 10px !important;
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
+  background: white !important;
+}
+
+@media not all and (min-width: 640px) {
+  .css-1ujsas3,
+  .css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+    font-size: 15px !important;
+  }
+  .css-fvipm8,
+  .css-1yk1gt9-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+    border-color: white !important;
+    height: 50px !important;
+    border-radius: 10px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    padding-left: -5px !important;
+    padding-right: -5px !important;
+    width: 95% !important;
+    background: white !important;
+  }
+}
+
 .try-it {
-  /* margin-top: 15px; */
-  /* background-image: url(https://assets-global.website-files.com/64a4aaf…/6517ae0…_bacgkround-v3-min.png); */
   background-position: 50%;
   background-size: cover;
-  /* margin-top: 0; */
   padding-top: 100px;
   padding-bottom: 140px;
   position: static;
@@ -140,6 +186,10 @@ td {
       rgba(121, 58, 255, 0.65) 0%,
       rgba(255, 255, 255, 0) 72%
     ) !important;
+}
+.try-it-e {
+  border-bottom-left-radius: 25% !important;
+  /* border:2px solid yellowgreen; */
 }
 
 .try-it p {
@@ -340,6 +390,56 @@ td {
 }
 .tagCard1 svg {
   font-size: 16px;
+}
+
+/* ----------------- */
+.text_edit h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text_edit h2 {
+  font-size: 2.15rem;
+  line-height: 2.3rem;
+  margin-top: 4.3rem !important;
+}
+
+.text_edit h3 {
+  font-size: 2.05rem !important;
+  line-height: 2.3rem;
+  margin-top: 3.3rem !important;
+}
+
+.text_edit h4 {
+  font-size: 2rem !important;
+  line-height: 2.3rem;
+  margin-top: 2.3rem !important;
+}
+
+.text_edit h5 {
+  font-size: 2rem !important;
+  line-height: 2.3rem;
+  margin-top: 1.3rem !important;
+}
+
+.text_edit p {
+  font-size: 1.4rem !important;
+  line-height: 1.65rem;
+}
+
+.text_edit li {
+  font-size: 1.4rem !important;
+  line-height: 1.65rem;
+  margin-bottom: 10px;
+}
+
+.text_edit strong {
+  font-weight: 500;
+}
+
+.text-ed-h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 
 @media (max-width: 1024px) {

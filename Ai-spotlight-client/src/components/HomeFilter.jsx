@@ -1,12 +1,15 @@
 import { Checkbox } from "@mui/material";
 import React, { useState } from 'react';
+import { FiMenu } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
+import { FaArrowDown91, FaArrowLeft, FaArrowLeftLong } from "react-icons/fa6";
 
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 
 
-export default function ToolsFilter({ pricing, setPricing, setFeatures, features }) {
+export default function ToolsFilter({ pricing, setPricing, setFeatures, features, setIsFilterClicked, isFilterClicked }) {
 
   const [checkedFree, setCheckedFree] = useState(false)
   const [checkedFreeTrial, setCheckedFreeTrial] = useState(false)
@@ -22,6 +25,8 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
   const [source, setCheckedOpen] = useState(false)
   const [discord, setCheckedDiscord] = useState(false)
   const [signup, setCheckedSignup] = useState(false)
+
+  const [isOpen, setIsOpen] = useState(false);
 
 
 
@@ -100,9 +105,15 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
   };
 
   return (
-    <div>
-      <p p={0} m={0}>Pricing</p>
+    <div className={`bg-white max-sm:w-full text-black p-10 pe-16 z-20 rounded-2xl border-2 border-gray-300 space-y-3 max-sm:absolute relative`}>
+      <button
+        onClick={() => setIsFilterClicked(!isFilterClicked)}
+        className="flex md:hidden text-2xl absolute right-5"
+      >
+        <FaArrowLeft />
+      </button>
       <div>
+        <p p={0} m={0} className="text-[21px] mb-2 font-semibold text-gray-700">Pricing</p>
         <p p={0} m={0} >
 
           <Checkbox className="chackbox"
@@ -164,80 +175,79 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
           Deals
         </p>
       </div>
+      <div className="">
+        <p p={0} m={0} className="text-[21px] mb-2 font-semibold">Features</p>
+        <p p={0} m={0}>
 
-      <p p={0} m={0}>Features</p>
+          <Checkbox className="chackbox"
+            value="waitlist"
+            checked={waitlist}
+            onChange={handelOnChangeFeatures}
+            {...label}
+          />
+          Waitlist
+        </p>
+        <p>
 
-      <p p={0} m={0}>
+          <Checkbox className="chackbox"
+            value="mobile_app"
+            checked={app}
+            onChange={handelOnChangeFeatures}
+            {...label}
+          />
+          Mobile App
+        </p>
+        <p>
 
-        <Checkbox className="chackbox"
-          value="waitlist"
-          checked={waitlist}
-          onChange={handelOnChangeFeatures}
-          {...label}
-        />
-        Waitlist
-      </p>
-      <p>
+          <Checkbox className="chackbox"
+            value="api"
+            checked={api}
+            onChange={handelOnChangeFeatures}
+            {...label}
+          />
+          API
+        </p>
+        <p>
+          <Checkbox className="chackbox"
+            value="browser_extension"
+            checked={browser}
+            onChange={handelOnChangeFeatures}
+            {...label}
+          />
+          Browser Extension
+        </p>
+        <p>
 
-        <Checkbox className="chackbox"
-          value="mobile_app"
-          checked={app}
-          onChange={handelOnChangeFeatures}
-          {...label}
-        />
-        Mobile App
-      </p>
-      <p>
+          <Checkbox className="chackbox"
+            value="open_source"
+            checked={source}
+            onChange={handelOnChangeFeatures}
+            {...label}
+          />
+          Open Source
+        </p>
+        <p>
 
-        <Checkbox className="chackbox"
-          value="api"
-          checked={api}
-          onChange={handelOnChangeFeatures}
-          {...label}
-        />
-        API
-      </p>
+          <Checkbox className="chackbox"
+            value="discord_community"
+            checked={discord}
+            onChange={handelOnChangeFeatures}
+            {...label}
+          />
+          Discord Community
+        </p>
+        <p>
 
+          <Checkbox className="chackbox"
+            value="no_signup_required"
+            checked={signup}
+            onChange={handelOnChangeFeatures}
+            {...label}
+          />
+          No Signup Required
+        </p>
+      </div>
 
-      <p> 
-        <Checkbox className="chackbox"
-          value="browser_extension"
-          checked={browser}
-          onChange={handelOnChangeFeatures}
-          {...label}
-        />
-        Browser Extension
-      </p>
-      <p>
-
-        <Checkbox className="chackbox"
-          value="open_source"
-          checked={source}
-          onChange={handelOnChangeFeatures}
-          {...label}
-        />
-        Open Source
-      </p>
-      <p>
-
-        <Checkbox className="chackbox"
-          value="discord_community"
-          checked={discord}
-          onChange={handelOnChangeFeatures}
-          {...label}
-        />
-        Discord Community
-      </p>
-      <p>
-
-        <Checkbox className="chackbox"
-          value="no_signup_required"
-          checked={signup}
-          onChange={handelOnChangeFeatures}
-          {...label}
-        />
-        No Signup Required
-      </p>
     </div>
   );
 }

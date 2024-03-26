@@ -5,7 +5,7 @@ import ToolsCard from "./ToolsCard";
 
 
 // Removed unused import
-const FeaturedTools = ({ title, tools }) => {
+const FeaturedTools = ({ title, tools, isFilterClicked, gridChecked }) => {
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["featuredTools"],
@@ -32,12 +32,11 @@ const FeaturedTools = ({ title, tools }) => {
 
   return (
     data && (
-      <div className="mt-10"> 
-        <h2 className="text-xl font-medium brightness-90 mb-5 text-center">
+      <div className="mt-">
+        <h2 className="text-2xl font-medium brightness-90 mb-5 text-center">
           {title}
         </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className={`ease-linear duration-500 ${isFilterClicked ? (gridChecked ? "block space-y-5 gap-4" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4") : (gridChecked ? "block space-y-5 gap-4" : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4")}`}>
           {data && data.map((item, index) => (
             <ToolsCard key={index} item={item} />
           ))}
@@ -46,7 +45,8 @@ const FeaturedTools = ({ title, tools }) => {
             <ToolsCard key={index} item={item} />
           ))}
         </div>
-      </div>
+
+      </div >
     )
   );
 };

@@ -92,7 +92,7 @@ const DetailsPage = () => {
     };
 
     try {
-      const response = await axios.post(`http://localhost:6060/api/v1/tools/feedback/${_id}`, {
+      const response = await axios.post(`https://spotlight-server-1.onrender.com/api/v1/tools/feedback/${_id}`, {
         formData
       }); 
       setFeedBack('');
@@ -153,9 +153,16 @@ const DetailsPage = () => {
     else return '';
   };
 
+  const next =">"
+
 
   return (
     <main className="wrapper details-wrapper my-10">
+      <div className=" ">
+      <p className="mb-5 dark:text-gray-500 text-gray-400 capitalize font-bold "> 
+        <Link to="/home" className=" hover:underline">Home </Link> {next} <Link to="/ai-tools/All-categories" className=" hover:underline">Ai Tool </Link> {next} {title}
+      </p>
+      </div>
       {metaTitle && metaDescription && (
         <Helmet>
           <title>{`${metaTitle} -- Ai SpotLghts`}</title>
@@ -253,10 +260,10 @@ const DetailsPage = () => {
         `flex justify-between gap-2 text-justify space-y-5 font-extralight details-align`,
       )}>
         <div className={clsx(`w-full md:w-[70%] card-align`)}>
-          <h3 className="font-bold text-xl capitalize">{title} Features </h3>
+          <h1 className="font-bold text-ed-h1 capitalize">{title} Features </h1>
           <div className={clsx(isOpenText ? null : "line-clamp-[7]",)}>
-            <p
-              className="space-y-5 leading-relaxed font-extralight"
+            <div
+              className="space-y-5 leading-relaxed font-extralight text_edit mt-5"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </div>

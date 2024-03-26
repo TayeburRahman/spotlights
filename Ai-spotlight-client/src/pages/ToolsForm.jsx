@@ -44,7 +44,7 @@ const ToolsForm = () => {
   const [features, setFeatures] = useState([]);
   const [price, setPricing] = useState([]);
 
-  const [istag, setTag] = useState([]);
+  // const [istag, setTag] = useState([]);
 
   const [axiosSecure] = useAxiosSecure();
   const [isAdmin] = useAdmin();
@@ -117,7 +117,7 @@ const ToolsForm = () => {
 
 
     try {
-      const response = await axiosSecure.post(`http://localhost:6060/api/v1/tools`, data);
+      const response = await axiosSecure.post(`https://spotlight-server-1.onrender.com/api/v1/tools`, data);
       reset();
       if (response.status === 200) {
         {
