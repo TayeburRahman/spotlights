@@ -379,7 +379,7 @@ const UpdateTool = () => {
               {...register("twitterLink")}
             />
           </div>
- 
+
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2">Pricing:</label>
             <Select
@@ -397,7 +397,7 @@ const UpdateTool = () => {
             >
               {Pricing.map((name) => (
                 <MenuItem key={name} value={name}>
-                  <Checkbox checked={isPrice?.indexOf(name) > -1} />
+                  <Checkbox checked={isPrice.indexOf(name) > -1} />
                   <ListItemText primary={name} />
                 </MenuItem>
               ))}
@@ -425,7 +425,7 @@ const UpdateTool = () => {
             >
               {Features.map((name) => (
                 <MenuItem key={name} value={name}>
-                  <Checkbox checked={isFeatures?.indexOf(name) > -1} />
+                  <Checkbox checked={isFeatures.indexOf(name) > -1} />
                   <ListItemText primary={name} />
                 </MenuItem>
               ))}

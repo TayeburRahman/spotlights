@@ -105,7 +105,7 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
   };
 
   return (
-    <div className={`bg-white max-sm:w-full text-black p-10 pe-16 z-20 rounded-2xl border-2 border-gray-300 space-y-3 max-sm:absolute relative`}>
+    <div className={`bg-cyprus/95 toolscard dark:toolscard1 max-sm:w-full dark:text-black text-white p-10 pe-16 z-20 rounded-2xl border-2 border-gray-300 space-y-3 max-sm:absolute relative`}>
       <button
         onClick={() => setIsFilterClicked(!isFilterClicked)}
         className="flex md:hidden text-2xl absolute right-5"
@@ -113,14 +113,20 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
         <FaArrowLeft />
       </button>
       <div>
-        <p p={0} m={0} className="text-[21px] mb-2 font-semibold text-gray-700">Pricing</p>
+        <p p={0} m={0} className="text-[21px] mb-2 font-semibold text-white dark:text-gray-700">Pricing</p>
         <p p={0} m={0} >
 
-          <Checkbox className="chackbox"
+          <Checkbox className={`"chackbox text-white" `}
             value="free"
             checked={checkedFree}
             onChange={handelOnChangePricing}
             {...label}
+            sx={{
+              // color: "#ffff",'
+              "checked1" : {
+                color: "white"
+              }
+            }}
           />
           Free
         </p>
