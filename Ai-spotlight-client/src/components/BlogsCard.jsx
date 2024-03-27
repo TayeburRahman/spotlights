@@ -1,6 +1,6 @@
+import { MdFavorite } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { buttonVariants } from "./Button";
-import { MdFavorite } from "react-icons/md";
 
 const BlogsCard = ({ item }) => {
   return (
@@ -18,8 +18,8 @@ const BlogsCard = ({ item }) => {
 
         <p className="line-clamp-2">{item?.subtitle}</p>
 
-        <p
-          className="line-clamp-3"
+        <div
+          className="line-clamp-3 text_edit"
           dangerouslySetInnerHTML={{ __html: item?.description }}
         />
 
