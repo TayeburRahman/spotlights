@@ -360,10 +360,7 @@ const ToolsSearchFilter = async (req, res) => {
   }
   if (req.query.audio_editing) {
     categories.push("Audio Edting");
-  }
-  // if (req.query.paid) {
-  //   categories.push("Paid");
-  // }
+  } 
   if (req.query.contact_for_pricing) {
     categories.push("Contact for Pricing");
   } 
@@ -417,6 +414,31 @@ const ToolsSearchFilter = async (req, res) => {
 
   console.log("pricingFilter", pricingFilter)
   //--------------------------------------------------------------
+
+    // PRICING FILTER
+
+    let catagoryFilter = []; 
+
+    if (req.query.free) {
+      pricingFilter.push("Free");
+    }
+    if (req.query.free_trial) {
+      pricingFilter.push("Free Trial");
+    }
+    if (req.query.contact_for_pricing) {
+      pricingFilter.push("Contact for Pricing");
+    }
+    if (req.query.freemium) {
+      pricingFilter.push("Freemium");
+    }
+    if (req.query.paid) {
+      pricingFilter.push("Paid");
+    }
+    if (req.query.deals) {
+      pricingFilter.push("Deals");
+    }
+  
+    //--------------------------------------------------------------
 
   const getQuery = () => {
     if (pricingFilter?.length > 0 && featuresFilter?.length > 0) {

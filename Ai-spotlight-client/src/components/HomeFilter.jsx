@@ -1,8 +1,7 @@
 import { Checkbox } from "@mui/material";
-import React, { useState } from 'react';
-import { FiMenu } from "react-icons/fi";
-import { IoClose } from "react-icons/io5";
-import { FaArrowDown91, FaArrowLeft, FaArrowLeftLong } from "react-icons/fa6";
+import React, { useContext, useState } from 'react';
+import { FaArrowLeft } from "react-icons/fa6";
+import DarkModeContext from "../providers/DarkModeContext ";
 
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -26,7 +25,7 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
   const [discord, setCheckedDiscord] = useState(false)
   const [signup, setCheckedSignup] = useState(false)
 
-  const [isOpen, setIsOpen] = useState(false);
+  const { darkMode } = useContext(DarkModeContext);
 
 
 
@@ -105,7 +104,7 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
   };
 
   return (
-    <div className={`bg-white max-sm:w-full text-black p-10 pe-16 z-20 rounded-2xl border-2 border-gray-300 space-y-3 max-sm:absolute relative`}>
+    <div className={`bg-cyprus/95 toolscard0 dark:toolscard1 max-sm:w-full dark:text-black text-white p-10 pe-16 z-20 rounded-2xl border-2 border-gray-300 space-y-3 max-sm:absolute relative`}>
       <button
         onClick={() => setIsFilterClicked(!isFilterClicked)}
         className="flex md:hidden text-2xl absolute right-5"
@@ -113,17 +112,22 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
         <FaArrowLeft />
       </button>
       <div>
-        <p p={0} m={0} className="text-[21px] mb-2 font-semibold text-gray-700">Pricing</p>
-        <p p={0} m={0} >
+        <p p={0} m={0} className="text-[21px] mb-2 font-semibold text-white dark:text-gray-700">Pricing</p>
+      
 
-          <Checkbox className="chackbox"
+          <Checkbox className={`"chackbox text-white" `}
             value="free"
             checked={checkedFree}
             onChange={handelOnChangePricing}
             {...label}
-          />
-          Free
-        </p>
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } 
+          }} 
+            />
+          Free 
         <p>
 
           <Checkbox className="chackbox"
@@ -131,6 +135,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={checkedFreeTrial}
             onChange={handelOnChangePricing}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           Free Trial
         </p>
@@ -151,6 +160,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={checkedFreemium}
             onChange={handelOnChangePricing}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           Freemium
         </p>
@@ -161,6 +175,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={checkedPaid}
             onChange={handelOnChangePricing}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           Paid
         </p>
@@ -171,6 +190,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={checkedDeals}
             onChange={handelOnChangePricing}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           Deals
         </p>
@@ -184,6 +208,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={waitlist}
             onChange={handelOnChangeFeatures}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           Waitlist
         </p>
@@ -194,6 +223,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={app}
             onChange={handelOnChangeFeatures}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           Mobile App
         </p>
@@ -204,6 +238,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={api}
             onChange={handelOnChangeFeatures}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           API
         </p>
@@ -213,6 +252,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={browser}
             onChange={handelOnChangeFeatures}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           Browser Extension
         </p>
@@ -223,6 +267,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={source}
             onChange={handelOnChangeFeatures}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           Open Source
         </p>
@@ -233,6 +282,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={discord}
             onChange={handelOnChangeFeatures}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           Discord Community
         </p>
@@ -243,6 +297,11 @@ export default function ToolsFilter({ pricing, setPricing, setFeatures, features
             checked={signup}
             onChange={handelOnChangeFeatures}
             {...label}
+            sx={{ 
+              color: `${darkMode? "#e3e3e3":"#676767"}`, 
+              '&.Mui-checked': {
+                color: '#06b5ae',  
+              } }} 
           />
           No Signup Required
         </p>

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { buttonVariants } from "./Button";
 
 const BlogsCard = ({ item }) => {
+  
   return (
     <div className="rounded-md bg-cyprus/95 dark:bg-white brightness-110 overflow-hidden shadow-xl">
       <img

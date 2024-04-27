@@ -28,12 +28,13 @@ const Home = () => {
   const [response, setResponse] = useState(true);
   const [isFilterClicked, setIsFilterClicked] = useState(false); // New state
   const [isGridClicked, setIsGridClicked] = useState(false); // New state
+ 
 
   useEffect(() => {
     Aos.init({ duration: 1000 });
   }, []);
 
-  let url = `https://spotlight-server-1.onrender.com/api/v1/tools/get/filter`;
+  let url = `http://localhost:6060/api/v1/tools/get/filter`;
 
   useEffect(() => {
     const filterValue =
@@ -60,8 +61,6 @@ const Home = () => {
     });
   }, [status, features, pricing, sort, pathname]);
 
-  console.log('sort', f_option);
-
   const handleFilterClick = () => {
     setIsFilterClicked(!isFilterClicked);
   };
@@ -87,20 +86,23 @@ const Home = () => {
           <div className="my-10 mt-1 flex items-center justify-between gap-0 card-align z-50">
             
             {/* test button */}
+            {/* changed here start */}
             <button onClick={() => setIsFilterClicked(!isFilterClicked)}
-              className="bg-white text-black flex items-center gap-2 font-semibold px-4 py-3 text-[17px] my-5 rounded-[12px] hover:drop-shadow-xl transition-all border-[1px] border-gray-300 max-sm:text-[15px]"
+              className=" bg-cyprus/95 toolscard0 dark:toolscard1 text-white dark:text-black flex items-center gap-2 font-semibold px-4 py-3 text-[17px] my-5 rounded-[12px] hover:drop-shadow-xl transition-all border-[1px] border-gray-300 max-sm:text-[15px]"
             >
-              <ImFilter className="text-gray-700 text-[15px]" /> Filters
+              <ImFilter className="text-white dark:text-gray-700 text-[15px]" /> Filters
             </button>
-
+ {/* changed here end */}
 
             <div className="flex gap-2 items-center">
+               {/* changed here start */}
               <button
                 onClick={handleGridClick}
-                className="bg-white max-sm:hidden text-black flex items-center justify-center gap-1 font-semibold px-4 py-3 text-[17px]   my-5 rounded-[12px] hover:drop-shadow-xl transition-all border-[1px] border-gray-300 max-sm:text-[12px]"
+                className="bg-white bg-cyprus/95 toolscard0 dark:toolscard1 max-sm:hidden text-white dark:text-black flex items-center justify-center gap-1 font-semibold px-4 py-3 text-[17px]   my-5 rounded-[12px] hover:drop-shadow-xl transition-all border-[1px] border-gray-300 max-sm:text-[12px]"
               >
                 {isGridClicked ? (<CiGrid2H className="font-900 text-[20px]" />) : (<MdGridOn className="font-bold text-[15px]" />)}View
               </button>
+               {/* changed here end */}
               <SortTools sort={sort} setSortBy={setSortBy} />
             </div>
           </div>

@@ -1,28 +1,37 @@
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../providers/AuthProvider";
-import { Link } from "react-router-dom";
-import GoogleLogin from "./GoogleLogin";
 import clsx from "clsx";
-import { MdLightMode, MdDarkMode } from "react-icons/md";
-import { IoClose } from "react-icons/io5";
+import { useContext, useEffect, useState } from "react";
 import { FiMenu } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../providers/AuthProvider";
+import DarkModeContext from "../providers/DarkModeContext ";
+import GoogleLogin from "./GoogleLogin";
 
 const Navbar = () => {
   const { user } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [darkTheme, setDarkTheme] = useState(false);
 
+  const { darkMode, setDarkMode } = useContext(DarkModeContext);
+
   useEffect(() => {
     if (window.localStorage.getItem("DarkTheme") !== null) {
       setDarkTheme(JSON.parse(window.localStorage.getItem("DarkTheme")));
-    }
+      
+    } 
+     
   }, []);
+
+  console.log("check", darkMode)
 
   useEffect(() => {
     if (darkTheme === true) {
       document.querySelector("html").classList.add("dark");
+      setDarkMode(false)
     } else {
       document.querySelector("html").classList.remove("dark");
+      setDarkMode("dark");
     }
 
     window.localStorage.setItem("DarkTheme", JSON.stringify(darkTheme));
