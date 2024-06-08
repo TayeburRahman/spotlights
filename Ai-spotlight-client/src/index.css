@@ -482,3 +482,70 @@ td {
     margin-top: 20px;
   }
 }
+
+.font-extralight h1 {
+  font-size: 2rem !important;
+  line-height: 2rem !important;
+  font-weight: 600;
+  font-family: MonumentGrotesk, sans-serif !important;
+  margin-top: 0px !important;
+}
+
+.font-extralight h2 {
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
+  font-weight: 600;
+  font-family: MonumentGrotesk, sans-serif !important;
+  margin-top: 0px !important;
+}
+
+.font-extralight h3 {
+  font-size: 1.675rem !important;
+  line-height: 2.25rem !important;
+  font-weight: 600;
+  font-family: MonumentGrotesk, sans-serif !important;
+  margin-top: 0px !important;
+}
+
+.font-extralight h4 {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+  font-weight: 600;
+  font-family: MonumentGrotesk, sans-serif !important;
+  margin-top: 0px !important;
+}
+
+.font-extralight h5 {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+  font-weight: 600;
+  font-family: MonumentGrotesk, sans-serif !important;
+  margin-top: 0px !important;
+}
+
+.font-extralight ul {
+  list-style: disc !important;
+  padding-inline-start: 40px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+.font-extralight ul li {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+  font-family: MonumentGrotesk, sans-serif !important;
+  margin-top: 0px !important;
+}
+
+.font-extralight p {
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+  font-family: MonumentGrotesk, sans-serif !important;
+  margin-top: 0px !important;
+}
+
+.text-up {
+  text-transform: capitalize !important;
+}

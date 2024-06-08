@@ -395,9 +395,9 @@ const UpdateTool = () => {
               MenuProps={MenuProps}
               style={{ width: "100%" }}
             >
-              {Pricing.map((name) => (
+              {Pricing?.map((name) => (
                 <MenuItem key={name} value={name}>
-                  <Checkbox checked={isPrice.indexOf(name) > -1} />
+                  <Checkbox checked={isPrice?.indexOf(name) > -1} />
                   <ListItemText primary={name} />
                 </MenuItem>
               ))}
@@ -416,7 +416,7 @@ const UpdateTool = () => {
               placeholder='Select Features'
               multiple
               required
-              value={isFeatures}
+              value={isFeatures }
               onChange={handleChangesetFeatures}
               input={<OutlinedInput />}
               renderValue={(selected) => selected.join(', ')}
@@ -425,7 +425,7 @@ const UpdateTool = () => {
             >
               {Features.map((name) => (
                 <MenuItem key={name} value={name}>
-                  <Checkbox checked={isFeatures.indexOf(name) > -1} />
+                  <Checkbox checked={isFeatures?.indexOf(name) > -1} />
                   <ListItemText primary={name} />
                 </MenuItem>
               ))}

@@ -1,3 +1,4 @@
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import clsx from "clsx";
@@ -20,13 +21,13 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const DetailsPage = () => {
   const { user } = useContext(AuthContext);
-  const { showToast, displayToast } = useToast();
+  const { displayToast } = useToast();
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
   const [isOpenText, setIsOpenText] = useState(false);
   const [isFeedback, setFeedBack] = useState('');
-  const [feedbackState, setfeedbackState] = useState(false)
+  const [feedbackState, setFeedbackState] = useState(false)
   const [open, setOpen] = useState(false)
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
   const [averageRating, setAverageRating] = useState(0);
@@ -163,6 +164,10 @@ const DetailsPage = () => {
         </Helmet>
       )}
 
+      <div className='mb-4'>
+         <Link to="/">Home</Link> <KeyboardArrowRightIcon/> <Link to="/ai-tools/All-categories">AI Tools</Link>   <KeyboardArrowRightIcon/> {title}
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-10">
         <img
           src={toolsImage}
@@ -253,7 +258,7 @@ const DetailsPage = () => {
         `flex justify-between gap-2 text-justify space-y-5 font-extralight details-align`,
       )}>
         <div className={clsx(`w-full md:w-[70%] card-align`)}>
-          <h3 className="font-bold text-xl capitalize">{title} Features </h3>
+          <h3 className="font-bold text-xl capitalize mb-5">{title} Features </h3>
           <div className={clsx(isOpenText ? null : "line-clamp-[7]",)}>
             <p
               className="space-y-5 leading-relaxed font-extralight"
@@ -291,7 +296,6 @@ const DetailsPage = () => {
           )}
         </div>
 
-        {/* // )} */}
       </div>
 
       {relatedTools && relatedTools.length > 0 && (
@@ -327,7 +331,7 @@ const DetailsPage = () => {
                   <div className="flex items-center gap-2">
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
-                        <FaStar key={i} className={`text-${i < userRating ? 'yellow-600' : 'gray-400'}`} />
+                        <FaStar key={i} className={`text-${i < userRating ? 'yellow-400 ' : 'gray-400'}`} />
                       ))}
                     </div> <p className="font-[500] text-[16px] mt-[1px]">{userRating}</p>
                   </div>

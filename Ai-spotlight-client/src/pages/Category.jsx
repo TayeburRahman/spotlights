@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import ToolsCard from "../components/ToolsCard";
+import { useParams } from "react-router-dom";
 import Categories from "../components/Categories";
+import ToolsCard from "../components/ToolsCard";
 import { baseUrl } from "../config/Url";
 
 const Category = () => {
@@ -32,8 +32,7 @@ const Category = () => {
 
   const categoryTools = data.filter(
     (tool) => tool.category === category.replace(/-/g, " ")
-  );
-  console.log(categoryTools.length);
+  ); 
 
   return (
     <section className="wrapper my-10">
