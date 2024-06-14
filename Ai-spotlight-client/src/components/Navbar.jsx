@@ -28,10 +28,10 @@ const Navbar = () => {
   useEffect(() => {
     if (darkTheme === true) {
       document.querySelector("html").classList.add("dark");
-      setDarkMode(false)
+      setDarkMode(false) 
     } else {
       document.querySelector("html").classList.remove("dark");
-      setDarkMode("dark");
+      setDarkMode("dark"); 
     }
 
     window.localStorage.setItem("DarkTheme", JSON.stringify(darkTheme));

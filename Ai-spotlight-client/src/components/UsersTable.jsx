@@ -1,7 +1,10 @@
-import Button from "./Button";
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import Button from "./Button";
 
-const UsersTable = ({ item, index, handleMakeAdmin, handleMakeUser }) => {
+const UsersTable = ({ item, index, handleMakeAdmin, handleMakeUser, route }) => {
+
+  const navigate = useNavigate()
   // component code here
   return (
     <tr className="text-left">
@@ -18,9 +21,37 @@ const UsersTable = ({ item, index, handleMakeAdmin, handleMakeUser }) => {
 
       <td>{item?.userEmail}</td>
 
-      <td className="capitalize">{item?.role}</td>
+      {
+        route === 'publication' && (
+          <td>{item?.invoice_date}</td>
+        )
+      }
 
-      {item?.role === "user" ? (
+{
+        route === 'publication' ? (
+          <td className="capitalize">{item?.payment && item?.payment }</td>
+        ):(
+          <td className="capitalize">{item?.role }</td>
+        )
+      }
+
+      
+
+     
+
+      {route === 'publication' && (
+        <td>
+          <Button 
+            size="small"
+            colors="transparent"
+            onClick={e => navigate(`/dashboard/manage-order/${item?._id}`) }
+          >
+            Go Publication
+          </Button>
+        </td>
+      )}
+
+      {route !== 'publication' && item?.role === "user" && (
         <td>
           <Button
             onClick={() => handleMakeAdmin(item?._id)}
@@ -30,7 +61,10 @@ const UsersTable = ({ item, index, handleMakeAdmin, handleMakeUser }) => {
             Admin
           </Button>
         </td>
-      ) : (
+
+      )}
+
+      {route !== 'publication' && item?.role === "admin" && (
         <td>
           <Button
             onClick={() => handleMakeUser(item?._id)}
@@ -40,7 +74,10 @@ const UsersTable = ({ item, index, handleMakeAdmin, handleMakeUser }) => {
             User
           </Button>
         </td>
+
       )}
+
+
     </tr>
   );
 };

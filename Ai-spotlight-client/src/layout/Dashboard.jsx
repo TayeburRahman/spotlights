@@ -1,16 +1,19 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { FiMenu } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
 import useAdmin from "../hooks/useAdmin";
+import DarkModeContext from "../providers/DarkModeContext ";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
   const [isOpen, setIsOpen] = useState(false);
   const [darkTheme, setDarkTheme] = useState(false);
+
+  const { darkMode, setDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     if (window.localStorage.getItem("DarkTheme") !== null) {
@@ -21,8 +24,10 @@ const Dashboard = () => {
   useEffect(() => {
     if (darkTheme === true) {
       document.querySelector("html").classList.add("dark");
+      setDarkMode(false) 
     } else {
       document.querySelector("html").classList.remove("dark");
+      setDarkMode("dark"); 
     }
 
     window.localStorage.setItem("DarkTheme", JSON.stringify(darkTheme));
@@ -98,6 +103,12 @@ const Dashboard = () => {
                   >
                     Publish Blog
                   </Link>
+                  <Link
+                    onClick={() => setIsOpen(false)}
+                    to="/dashboard/manage-publications"
+                  >
+                    Manage publications
+                  </Link>
                 </>
               ) : (
                 <>
@@ -134,6 +145,9 @@ const Dashboard = () => {
               <Link to="/dashboard/manage-blogs">Manage Blogs</Link>
               <Link to="/dashboard/add-tool">Add Tool</Link>
               <Link to="/dashboard/publish-blog">Publish Blog</Link>
+              <Link to="/dashboard/manage-publications">
+                    Manage publications
+                  </Link>
             </>
           ) : (
             <>

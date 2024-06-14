@@ -3,7 +3,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select from '@mui/material/Select';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -15,6 +15,7 @@ import Button from "../components/Button";
 import { baseUrl } from "../config/Url";
 import useAdmin from "../hooks/useAdmin";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import DarkModeContext from '../providers/DarkModeContext ';
 
 const Features = ['Waitlist', 'Browser Extension', 'Open Source', 'Mobile App', 'Discord Community', 'API', 'No Signup Required'];
 const Pricing = ['Free', 'Freemium', 'Free Trial', 'Paid',  "Deals"];
@@ -62,6 +63,8 @@ const UpdateTool = () => {
   const [isPrice, setPricing] = useState([]);
   const [axiosSecure] = useAxiosSecure();
   const navigate = useNavigate();
+
+  const { darkMode } = useContext(DarkModeContext);
 
   const {
     register,
@@ -157,7 +160,7 @@ const UpdateTool = () => {
               {...register("title", {
                 required: title?.length > 0 ? false : true,
               })}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
             />
             {errors.title && (
               <p className="text-red-500 text-xs italic">Title is required.</p>
@@ -172,7 +175,7 @@ const UpdateTool = () => {
               {...register("subtitle", {
                 required: subtitle?.length > 0 ? false : true,
               })}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
             />
             {errors.subtitle && (
               <p className="text-red-500 text-xs italic">
@@ -190,7 +193,7 @@ const UpdateTool = () => {
               {...register("metaTitle", {
                 required: metaTitle?.length > 0 ? false : true,
               })}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
             />
             {errors.metaTitle && (
               <p className="text-red-500 text-xs italic">
@@ -206,7 +209,7 @@ const UpdateTool = () => {
               {...register("metaDescription", {
                 required: metaDescription?.length > 0 ? false : true,
               })}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
             />
             {errors.metaDescription && (
               <p className="text-red-500 text-xs italic">
@@ -227,7 +230,7 @@ const UpdateTool = () => {
                   clearErrors("description");
                 }
               }}
-              className="shadow rounded w-full appearance-none focus:outline-none min-h-[200px]"
+              className="shadow rounded w-full appearance-none focus:outline-none min-h-[200px] border-10"
               placeholder="Enter your description.."
             />
             {errors.description && (
@@ -241,7 +244,7 @@ const UpdateTool = () => {
             <div className="mb-4">
               <label className="block text-sm font-bold mb-2">Category:</label>
               <select
-                className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+                className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
                 {...register("category")}
               >
                 <option selected>{category}</option>
@@ -265,7 +268,7 @@ const UpdateTool = () => {
             <input
               type="text"
               defaultValue={toolsLogo}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("toolsLogo", { required: true })}
             />
             {errors.toolsLogo && (
@@ -280,7 +283,7 @@ const UpdateTool = () => {
             <input
               type="text"
               defaultValue={toolsImage}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("toolsImage", { required: true })}
             />
             {errors.toolsImage && (
@@ -297,7 +300,7 @@ const UpdateTool = () => {
             <input
               type="text"
               defaultValue={websiteLink}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("websiteLink", { required: true })}
             />
             {errors.websiteLink && (
@@ -314,7 +317,7 @@ const UpdateTool = () => {
             <input
               type="text"
               defaultValue={videoReviewLink}
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               placeholder="Paste the embed URL here"
               {...register("videoReviewLink")}
             />
@@ -327,7 +330,7 @@ const UpdateTool = () => {
             <input
               type="text"
               defaultValue={youtubeLink}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("youtubeLink")}
             />
           </div>
@@ -339,7 +342,7 @@ const UpdateTool = () => {
             <input
               type="text"
               defaultValue={facebookLink}
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("facebookLink")}
             />
           </div>
@@ -351,7 +354,7 @@ const UpdateTool = () => {
             <input
               type="text"
               defaultValue={discordLink}
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("discordLink")}
             />
           </div>
@@ -363,7 +366,7 @@ const UpdateTool = () => {
             <input
               type="text"
               defaultValue={linkedinLink}
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("linkedinLink")}
             />
           </div>
@@ -375,16 +378,14 @@ const UpdateTool = () => {
             <input
               type="text"
               defaultValue={twitterLink}
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("twitterLink")}
             />
           </div>
 
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2">Pricing:</label>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
+            <Select 
               placeholder='Select pricing'
               multiple
               required
@@ -393,7 +394,19 @@ const UpdateTool = () => {
               input={<OutlinedInput />}
               renderValue={(selected) => selected.join(', ')}
               MenuProps={MenuProps}
-              style={{ width: "100%" }}
+              sx={{
+                width: "100%", 
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                }, "& .MuiSelect-icon": {
+                  color: "#858585",   
+                }, 
+              }}
+              className="shadow text-stone-900 border-10"
+              id={`${darkMode && 'bg-cyprus'}`}
             >
               {Pricing?.map((name) => (
                 <MenuItem key={name} value={name}>
@@ -410,9 +423,7 @@ const UpdateTool = () => {
 
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2">Features:</label>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
+            <Select 
               placeholder='Select Features'
               multiple
               required
@@ -421,7 +432,19 @@ const UpdateTool = () => {
               input={<OutlinedInput />}
               renderValue={(selected) => selected.join(', ')}
               MenuProps={MenuProps}
-              style={{ width: "100%" }}
+              sx={{
+                width: "100%", 
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                }, "& .MuiSelect-icon": {
+                  color: "#858585",   
+                },
+              }}
+              className="shadow text-stone-900 border-10"
+              id={`${darkMode && 'bg-cyprus'}`}
             >
               {Features.map((name) => (
                 <MenuItem key={name} value={name}>

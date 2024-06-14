@@ -15,6 +15,7 @@ import Button from "../components/Button";
 import useAdmin from "../hooks/useAdmin";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { AuthContext } from "../providers/AuthProvider";
+import DarkModeContext from '../providers/DarkModeContext ';
 
 
 const ITEM_HEIGHT = 48;
@@ -50,6 +51,7 @@ const ToolsForm = () => {
   const [isAdmin] = useAdmin();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate(); 
+  const { darkMode } = useContext(DarkModeContext);
 
   const {
     register,
@@ -65,9 +67,6 @@ const ToolsForm = () => {
   }, [register]);
 
   const descriptionContent = watch("description");
-
-
-
 
   const handleChangesetPricing = (event) => {
     const {
@@ -91,7 +90,6 @@ const ToolsForm = () => {
 
   const onSubmit = async (e) => {
 
-
     const data = {
       userName: e.userName,
       userEmail: e.userEmail,
@@ -113,8 +111,6 @@ const ToolsForm = () => {
       toolsLogo: e.toolsLogo,
       linkedinLink: e.linkedinLink,  
     } 
-
-
 
     try {
       const response = await axiosSecure.post(`http://localhost:6060/api/v1/tools`, data);
@@ -160,9 +156,10 @@ const ToolsForm = () => {
               <label className="block text-sm font-bold mb-2">User Name:</label>
               <input
                 type="text"
-                className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+                className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
                 defaultValue={user?.displayName}
                 readOnly
+                placeholder='Write your user name'
                 {...register("userName", { required: true })}
               />
             </div>
@@ -173,9 +170,10 @@ const ToolsForm = () => {
               </label>
               <input
                 type="text"
-                className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+                className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
                 defaultValue={user?.email}
                 readOnly
+                placeholder='Write your email'
                 {...register("userEmail", { required: true })}
               />
             </div>
@@ -185,7 +183,8 @@ const ToolsForm = () => {
             <label className="block text-sm font-bold mb-2">Tools Title:</label>
             <input
               type="text"
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
+              placeholder='Write tools title here'
               {...register("title", { required: true })}
             />
             {errors.title && (
@@ -198,7 +197,8 @@ const ToolsForm = () => {
             <input
               type="text"
               {...register("subtitle", { required: true })}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
+              placeholder='Write your sub title here'
             />
             {errors.subtitle && (
               <p className="text-red-500 text-xs italic">
@@ -213,8 +213,9 @@ const ToolsForm = () => {
             <input
               type="text"
               {...register("metaTitle", { required: true })}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               value={metaTitle} onChange={(e) => setMetaTitle(e.target.value)}
+              placeholder='Write meta title here'
             />
             {errors.metaTitle && (
               <p className="text-red-500 text-xs italic">
@@ -227,9 +228,10 @@ const ToolsForm = () => {
             <input
               type="text"
               {...register("metaDescription", { required: true })}
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               value={metaDescription}
               onChange={(e) => setMetaDescription(e.target.value)}
+              placeholder='Write meta description here'
             />
             {errors.metaDescription && (
               <p className="text-red-500 text-xs italic">
@@ -253,7 +255,7 @@ const ToolsForm = () => {
               onChange={(data) => {
                 setValue("description", data);
               }}
-              className="shadow rounded w-full appearance-none focus:outline-none min-h-[200px]"
+              className="shadow rounded w-full appearance-none focus:outline-none min-h-[200px] border-10 background-none"
               placeholder="Enter your description.."
             />
             {errors.description && (
@@ -268,7 +270,7 @@ const ToolsForm = () => {
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2">Category:</label>
             <select
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("category", { required: true })}
             >
               <option value="" disabled selected>
@@ -291,8 +293,9 @@ const ToolsForm = () => {
             <label className="block text-sm font-bold mb-2">Logo URL:</label>
             <input
               type="text"
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("toolsLogo", { required: true })}
+               placeholder='https://'
             />
             {errors.toolsLogo && (
               <p className="text-red-500 text-xs italic">
@@ -304,8 +307,9 @@ const ToolsForm = () => {
             <label className="block text-sm font-bold mb-2">Image URL:</label>
             <input
               type="text"
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("toolsImage", { required: true })}
+               placeholder='https://'
             />
             {errors.toolsImage && (
               <p className="text-red-500 text-xs italic">
@@ -320,8 +324,9 @@ const ToolsForm = () => {
             </label>
             <input
               type="text"
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("websiteLink", { required: true })}
+               placeholder='https://'
             />
             {errors.websiteLink && (
               <p className="text-red-500 text-xs italic">
@@ -336,8 +341,8 @@ const ToolsForm = () => {
             </label>
             <input
               type="text"
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
-              placeholder="Paste the embed URL here"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
+           placeholder='https://'
               {...register("videoReviewLink")}
             />
           </div>
@@ -348,8 +353,9 @@ const ToolsForm = () => {
             </label>
             <input
               type="text"
-              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90  dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("youtubeLink")}
+               placeholder='https://'
             />
           </div>
 
@@ -359,8 +365,9 @@ const ToolsForm = () => {
             </label>
             <input
               type="text"
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("facebookLink")}
+               placeholder='https://'
             />
           </div>
 
@@ -370,8 +377,9 @@ const ToolsForm = () => {
             </label>
             <input
               type="text"
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("discordLink")}
+               placeholder='https://'
             />
           </div>
 
@@ -381,8 +389,9 @@ const ToolsForm = () => {
             </label>
             <input
               type="text"
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("linkedinLink")}
+               placeholder='https://'
             />
           </div>
 
@@ -392,16 +401,15 @@ const ToolsForm = () => {
             </label>
             <input
               type="text"
-              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none"
+              className="bg-cyprus/90 dark:bg-white shadow rounded py-2 px-4 w-full appearance-none focus:outline-none border-10"
               {...register("twitterLink")}
+               placeholder='https://'
             />
           </div> 
 
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2">Pricing:</label>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
+            <Select 
               placeholder='Select pricing'
               multiple
               required
@@ -409,9 +417,20 @@ const ToolsForm = () => {
               onChange={handleChangesetPricing}
               input={<OutlinedInput />}
               renderValue={(selected) => selected.join(', ')}
-              MenuProps={MenuProps}
-              style={{ width: "100%" }}
-              className="bg-cyan-200"
+              MenuProps={MenuProps} 
+              sx={{
+                width: "100%", 
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                }, "& .MuiSelect-icon": {
+                  color: "#858585",   
+                }, 
+              }}
+              className="shadow text-stone-900 border-10"
+              id={`${darkMode && 'bg-cyprus'}`}
             >
               {Pricing.map((name) => (
                 <MenuItem key={name} value={name}>
@@ -428,18 +447,29 @@ const ToolsForm = () => {
 
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2">Features:</label>
-            <Select
-              labelId="demo-multiple-checkbox-label"
-              id="demo-multiple-checkbox"
-              placeholder='Select Features'
+            <Select 
+              
               multiple
               required
               value={features}
               onChange={handleChangesetFeatures}
-              input={<OutlinedInput />}
+              input={<OutlinedInput />} 
               renderValue={(selected) => selected.join(', ')}
-              MenuProps={MenuProps}
-              style={{ width: "100%" }}
+              MenuProps={MenuProps} 
+              sx={{
+                width: "100%", 
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  border: "none",
+                }, "& .MuiSelect-icon": {
+                  color: "#858585",   
+                },
+              }}
+              className="shadow text-stone-900 border-10"
+              id={`${darkMode && 'bg-cyprus'}`}
+               placeholder='Select Features'
             >
               {Features.map((name) => (
                 <MenuItem key={name} value={name}>

@@ -44,7 +44,11 @@ body {
 }
 
 .quill {
-  @apply bg-cyprus/90 dark:bg-white;
+  @apply bg-cyprus/90 dark:bg-transparent;
+  max-height: 500px !important;
+}
+.ql-editor {
+  max-height: 450px !important;
 }
 
 .ql-toolbar {
@@ -548,4 +552,16 @@ td {
 
 .text-up {
   text-transform: capitalize !important;
+}
+#bg-cyprus {
+  background-color: rgb(16 29 64 / 0.9) !important;
+  color: white !important;
+}
+
+.border-10 {
+  border: 0.1px solid #27f8f19f;
+}
+
+.ql-container.ql-snow .ql-editor.ql-blank::before {
+  color: #888888;
 }

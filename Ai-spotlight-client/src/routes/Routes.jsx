@@ -1,30 +1,34 @@
-import { createBrowserRouter } from "react-router-dom";
 import axios from "axios";
-import Main from "../layout/Main";
-import Home from "../layout/Home";
+import { createBrowserRouter } from "react-router-dom";
+import { baseUrl } from "../config/Url";
+import CheckoutLayout from "../layout/Checkout";
 import Dashboard from "../layout/Dashboard";
-import ToolsForm from "../pages/ToolsForm";
+import Home from "../layout/Home";
+import Main from "../layout/Main";
+import Advertise from "../pages/Advertise";
+import AllCategories from "../pages/AllCategories";
+import Blogs from "../pages/Blogs";
+import BlogsForm from "../pages/BlogsForm";
+import Category from "../pages/Category";
+import Contact from "../pages/Contact";
 import DashboardHome from "../pages/DashboardHome";
-import MyTools from "../pages/MyTools";
+import Deals from "../pages/Deals";
+import DetailsPage from "../pages/DetailsPage";
+import ManageBlogs from "../pages/ManageBlogs";
 import ManageTools from "../pages/ManageTools";
 import ManageUsers from "../pages/ManageUsers";
-import DetailsPage from "../pages/DetailsPage";
-import PrivateRoute from "./PrivateRoute";
-import UpdateTool from "../pages/UpdateTool";
-import BlogsForm from "../pages/BlogsForm";
-import Blogs from "../pages/Blogs";
-import ManageBlogs from "../pages/ManageBlogs";
-import UpdateBlog from "../pages/UpdateBlog";
-import ToolsCard from "../components/ToolsCard";
-import Category from "../pages/Category";
+import MyTools from "../pages/MyTools";
 import Search from "../pages/Search";
-import Test from "../pages/Test";
-import Deals from "../pages/Deals";
-import { baseUrl } from "../config/Url";
-import Contact from "../pages/Contact";
-import AllCategories from "../pages/AllCategories";
 import SubmitATool from "../pages/SubmitATool";
-import Advertise from "../pages/Advertise";
+import Test from "../pages/Test";
+import ToolsForm from "../pages/ToolsForm";
+import UpdateBlog from "../pages/UpdateBlog";
+import UpdateTool from "../pages/UpdateTool";
+import ManagePublication from "../pages/dashboard/ManageOrders";
+import OrderDetails from "../pages/dashboard/OrderDetails";
+import Checkout from "../pages/payment/Checkout";
+import Payment from "../pages/payment/Payment";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +46,7 @@ const router = createBrowserRouter([
       {
         path: "/search/:value",
         element: <Search />,
-      },
+      }, 
       {
         path: "/ai-tools/:category",
         element: <Category />,
@@ -58,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "deals",
         element: <Deals />,
+      },
+      {
+        path: "order/checkout",
+        element: <Checkout />,
       },
       {
         path: "submit-tools",
@@ -108,6 +116,17 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/order",
+    element: <CheckoutLayout />,
+    children: [
+      
+      {
+        path: "pay",
+        element: <Payment />,
+      }, 
+    ],
+  },
+  {
     path: "/dashboard",
     element: (
       <PrivateRoute>
@@ -125,6 +144,7 @@ const router = createBrowserRouter([
         path: "submit-tools",
         element: <ToolsForm />,
       },
+      
       {
         path: "my-tools",
         element: <MyTools />,
@@ -151,6 +171,14 @@ const router = createBrowserRouter([
         path: "publish-blog",
         element: <BlogsForm />,
       },
+      {
+        path: "manage-publications",
+        element: <ManagePublication />,
+      }, 
+      {
+        path: "manage-order/:id",
+        element: <OrderDetails />,
+      }, 
     ],
   },
 ]);
