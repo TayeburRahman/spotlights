@@ -145,14 +145,17 @@ const Dashboard = () => {
               <Link to="/dashboard/manage-blogs">Manage Blogs</Link>
               <Link to="/dashboard/add-tool">Add Tool</Link>
               <Link to="/dashboard/publish-blog">Publish Blog</Link>
-              <Link to="/dashboard/manage-publications">
-                    Manage publications
+              <Link to="/dashboard/manage-orders">
+                    Manage Orders
                   </Link>
             </>
           ) : (
             <>
               <Link to="/dashboard/submit-tools">Submit Tools</Link>
               <Link to="/dashboard/my-tools">My Tools</Link>
+              <Link to="/dashboard/orders">
+                    My Orders
+                  </Link>
             </>
           )}
           <Link to="/">Home</Link>

@@ -34,7 +34,7 @@ const Home = () => {
     Aos.init({ duration: 1000 });
   }, []);
 
-  let url = `http://localhost:6060/api/v1/tools/get/filter`;
+  let url = `https://ai-spotlights.com/api/v1/tools/get/filter`;
 
   useEffect(() => {
     const filterValue =

@@ -12,18 +12,13 @@ const Navbar = () => {
   const { user } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [darkTheme, setDarkTheme] = useState(false);
-
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
 
   useEffect(() => {
     if (window.localStorage.getItem("DarkTheme") !== null) {
       setDarkTheme(JSON.parse(window.localStorage.getItem("DarkTheme")));
-      
     } 
-     
-  }, []);
-
-  console.log("check", darkMode)
+  }, []); 
 
   useEffect(() => {
     if (darkTheme === true) {

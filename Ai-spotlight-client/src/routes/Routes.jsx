@@ -26,8 +26,11 @@ import UpdateBlog from "../pages/UpdateBlog";
 import UpdateTool from "../pages/UpdateTool";
 import ManagePublication from "../pages/dashboard/ManageOrders";
 import OrderDetails from "../pages/dashboard/OrderDetails";
+import UserOrder from "../pages/dashboard/UserOrder";
+import UserOrderDetails from "../pages/dashboard/UserOrderDetails";
 import Checkout from "../pages/payment/Checkout";
 import Payment from "../pages/payment/Payment";
+import SuccessPayment from "../pages/payment/Successpay";
 import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
@@ -117,12 +120,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/order",
-    element: <CheckoutLayout />,
+    element:  <CheckoutLayout />,
     children: [
       
       {
         path: "pay",
         element: <Payment />,
+      }, 
+      {
+        path: "pay/success/:id",
+        element: <SuccessPayment />,
       }, 
     ],
   },
@@ -172,12 +179,20 @@ const router = createBrowserRouter([
         element: <BlogsForm />,
       },
       {
-        path: "manage-publications",
+        path: "manage-orders",
         element: <ManagePublication />,
       }, 
       {
         path: "manage-order/:id",
         element: <OrderDetails />,
+      }, 
+      {
+        path: "orders",
+        element: <UserOrder />,
+      }, 
+      {
+        path: "orders/:id",
+        element: <UserOrderDetails />,
       }, 
     ],
   },

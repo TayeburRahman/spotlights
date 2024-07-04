@@ -113,7 +113,7 @@ const ToolsForm = () => {
     } 
 
     try {
-      const response = await axiosSecure.post(`http://localhost:6060/api/v1/tools`, data);
+      const response = await axiosSecure.post(`https://ai-spotlights.com/api/v1/tools`, data);
       reset();
       if (response.status === 200) {
         {

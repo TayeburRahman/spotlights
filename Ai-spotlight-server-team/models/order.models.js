@@ -3,47 +3,29 @@ const mongoose = require("mongoose");
 // model step: 1
 const ordersModel = new mongoose.Schema(
     {
-        name: {
-            type: String,
+        packages: {
+            type: Object,
             required: true,
         },
-        email: {
-            type: String,
+        user: {
+            type: Object,
             required: true,
-        },
-        exPassword:{
-            type: String, 
         },
         price: {
             type: Number,
             required: true,
         },
-        writingPackage: {
+        checkout_details: {
             type: Object,
             required: true,
         },
-        publishPackage: {
+        payment_details: {
             type: Object,
             required: true,
-        },
-        brand: {
-            type: Object,
-            required: true,
-        },
-        newsStory: {
-            type: Object, 
         }, 
-        detailedResearch: {
-            type: Object,
-             
-        },
         i_date: {
             type: String,
             
-        }, 
-        type: {
-            type: String, 
-            enum: ["express", "login"] 
         }, 
         payment: {
             type: String,
@@ -63,4 +45,4 @@ const ordersModel = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model("orders", ordersModel);ssss
+module.exports = mongoose.model("orders", ordersModel);

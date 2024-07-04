@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import axios from "axios";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -6,9 +6,9 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { app } from "../firebase/firebase.config";
-import axios from "axios";
+import { createContext, useEffect, useState } from "react";
 import { baseUrl } from "../config/Url";
+import { app } from "../firebase/firebase.config";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -40,12 +40,14 @@ const AuthProvider = ({ children }) => {
           .post(`${baseUrl}/auth/jwt`, {
             email: currentUser.email,
           })
-          .then((data) => {
+          .then((data) => { 
             localStorage.setItem("access-token", data.data.token);
+            
             setLoading(false);
           });
       } else {
         localStorage.removeItem("access-token");
+        localStorage.removeItem("auth");
       }
       setLoading(false);
     });

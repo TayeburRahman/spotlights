@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../hooks/useAxiosSecure";
 import UsersTable from "../components/UsersTable";
 import { baseUrl } from "../config/Url";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const ManageUsers = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -103,6 +103,8 @@ const ManageUsers = () => {
       }
     });
   };
+
+  console.log("data",data)
 
   return (
     <main className="min-h-[calc(100vh-66px)] overflow-x-scroll lg:overflow-hidden">

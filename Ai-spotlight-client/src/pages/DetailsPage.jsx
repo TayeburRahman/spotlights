@@ -93,7 +93,7 @@ const DetailsPage = () => {
     };
 
     try {
-      const response = await axios.post(`http://localhost:6060/api/v1/tools/feedback/${_id}`, {
+      const response = await axios.post(`https://ai-spotlights.com/api/v1/tools/feedback/${_id}`, {
         formData
       }); 
       setFeedBack('');

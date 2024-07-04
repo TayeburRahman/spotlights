@@ -1,46 +1,58 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { baseUrl } from "../../config/Url";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Publication from "./Publication";
+import Details from "./order/Details";
+
 const OrderDetails = () => {
+    const { id } = useParams();
+    const [axiosSecure] = useAxiosSecure(); 
+    const [data , setData] = useState()
+    const [error , setError] = useState()
+    const [isLoading , setLoading] = useState()
+    const [status, setStatus] = useState(false); 
+
+    useEffect(() => {
+      const postData = async () => {
+        setLoading(true);
+        try {
+          const response = await axiosSecure.get(`${baseUrl}/api/v1/order/details/${id}`)
+          const { data } = response.data;  
+          if(data){
+            setData(data) 
+          } else {
+            setError(true)
+          } 
+          setLoading(false);
+        } catch (error) {
+          setLoading(false);
+          setError(true)
+        }
+      }; 
+      postData();
+    }, [status]);
+  
+    // if (isLoading)
+    //   return (
+    //     <div className="flex items-center justify-center min-h-screen">
+    //       Loading...
+    //     </div>
+    //   );
+      
+    if (error)
+      return (
+        <div className="flex items-center justify-center min-h-screen">
+          Error: {error.message}
+        </div>
+      );
    
     return (
         <main className="min-h-[calc(100vh-66px)] overflow-x-scroll lg:overflow-hidden">
-            <div>
-
-                <table className="w-full">
-                    <thead>
-                        <tr className="text-left shadow-lg rounded">
-                            <th>Id</th>
-                            <th>User Name</th>
-                            <th>Users Email</th>
-                            <th>Invoice Date</th>
-                            <th>Payment</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody className="my-5">
-                    {/* <tr className="text-left">
-                        <td>{index + 1}</td>
-                        <td className="flex items-center gap-4">
-                            <img
-                                className="rounded-full h-10 w-10 object-cover"
-                                src={item?.userImage}
-                                alt={item?.userName}
-                            />
-                            <strong className="capitalize">{item?.userName}</strong>
-                        </td>
-                        <td>{item?.userEmail}</td>
-                        <td>{item?.invoice_date}</td>
-                        <td className="capitalize">{item?.role}</td>
-                        <td>
-                            <Button
-                                size="small"
-                                colors="transparent"
-                            >
-                                Go Publication
-                            </Button>
-                        </td>
-                    </tr> */}
-                    </tbody>
-                </table> 
+            <Details  data={data} setStatus={setStatus} />
+            <div>  
             </div>
+            <Publication mType="admin"  />
         </main>
 
 

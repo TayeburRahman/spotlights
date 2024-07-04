@@ -14,7 +14,7 @@ const useFavourite = (item, user) => {
       try {
         // Check if user is logged in
         if (user) {
-          const response = await axios.get(`http://localhost:6060/api/v1/tools/featured/${item._id}/${user.email}`);
+          const response = await axios.get(`https://ai-spotlights.com/api/v1/tools/featured/${item._id}/${user.email}`);
           const result = response.data;
           setExisting(result.exist); // Update existing favorites
           setFavourite(result.favour); // Update favorite item details
@@ -39,7 +39,7 @@ const useFavourite = (item, user) => {
       return;
     }
 
-    axios.put(`http://localhost:6060/api/v1/tools/featured/${id}/${user?.email}`)
+    axios.put(`https://ai-spotlights.com/api/v1/tools/featured/${id}/${user?.email}`)
       .then(res => {
         // Toggle status to trigger data refetch
         setStatus(prevStatus => !prevStatus);

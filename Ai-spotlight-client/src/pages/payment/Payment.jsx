@@ -3,6 +3,8 @@ import { Box, Container } from '@mui/system';
 import axios from 'axios';
 import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
+import { baseUrl } from '../../config/Url';
+import useToast from '../../hooks/useToast';
 import './index.css';
 import stripeImg from './stripe.png';
 
@@ -10,7 +12,13 @@ const Payment = () => {
   const [isCouponState, setCouponState] = useState(false);
   const [coupon, setCoupon] = useState('');
   const [isLoading, setLoading] = useState(false);
+  const [isCheckout, setCheckout] = useState();
+  const [isPackages, setPackages] = useState();
+  const [isPrice, setPrice] = useState();
+  const [isUser, setUser] = useState();
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
+  const {displayToast} = useToast(); 
 
   const [discount, setDiscount] = useState({
     disc: false,
@@ -18,18 +26,38 @@ const Payment = () => {
   });
 
   const couponCode = 'specialdiscount10';
-  const discountPercentage = 10;
-  let price = 247
+  const discountPercentage = 10; 
+
+  React.useEffect(() => {
+    try {
+      const localOder = localStorage?.getItem('order');
+      if (localOder) {
+        const { checkout_details, packages, user} = JSON.parse(localOder);
+        if (
+          checkout_details ||
+          packages?.package_name  || user
+        ) {
+          setCheckout(checkout_details);
+          setPackages(packages?.package_name); 
+          setPrice(packages?.package_name?.price)
+          setUser(user)
+        } else {
+          navigate('/order/checkout');
+        }
+      }
+    } catch (error) {
+      console.error('Error retrieving user from local storage:', error);
+    }
+  }, []);
 
 
   const handleCouponApply = () => {
     if (coupon === couponCode) {
       if (!discount.disc) {
         const discountAmount =
-          price - (Number(price) * Number(discountPercentage)) / 100;
-        // dispatch(setStateTotalPrice({ total: Math.floor(discountAmount) }));
+        isPackages?.price - (Number(isPackages?.price ) * Number(discountPercentage)) / 100; 
 
-        price = discountAmount
+        setPrice(discountAmount)
         setDiscount((data) => ({
           ...data,
           disc: true,
@@ -37,9 +65,8 @@ const Payment = () => {
         }));
       }
       return;
-    } else {
-      //   dispatch(setStateTotalPrice({ total: priceOriginal }));
-      price = 247
+    } else { 
+      setPrice(isPackages?.price)
       setDiscount((data) => ({
         ...data,
         disc: false,
@@ -84,8 +111,45 @@ const Payment = () => {
     }
   };
 
-  const onSubmit = () => {
-    navigate('/order/pay')
+  const onSubmit = async (data) => {
+    setLoading(true);
+
+    const formData = {
+      checkout_details: isCheckout,
+      packages: isPackages,
+      payment_details: data, 
+      user: isUser,
+    };
+    try {
+      const response = await axios.post(
+        `${baseUrl}/api/v1/order/payment`,
+        { formData },
+      );
+
+      console.log("response", response)
+
+      if (response.status !== 200) {
+        setLoading(false);
+        displayToast({
+          status: 'error',
+          message: 'Something wrong. Please try again',
+        });
+        return;
+      }
+
+      if (response?.data?.session.url) {
+        window.location.href = response.data.session.url;
+        localStorage.removeItem('order');
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log("error", error)
+      setLoading(false);
+      displayToast({
+        status: 'error',
+        message: 'Server Error!',
+      });
+    }
   };
   return (
     <Container className="padding-50">
@@ -96,13 +160,13 @@ const Payment = () => {
             <div className='border-bottom pb-4'>
               <div className='d-flex-c justify-between px-5 pt-5 pb-2'>
                 <h4 className=''>Tool Submission: Verified</h4>
-                <h4>$247.00</h4>
+                <h4>${isPrice}</h4>
               </div>
               <p className='text-small px-5'>Selects and pays for verified</p>
             </div>
             <div className='border-bottom d-flex-c justify-between p-5'>
               <h4 className=''>Total (USD)</h4>
-              <h4>$247.00</h4>
+              <h4>${isPrice}</h4>
             </div>
             <div className='p-5'>
               <p className='pb-5'>Futurepedia is a popular AI tools website with over 400K+ monthly visitors and 200k members frequently looking to adopt new tools. </p>
@@ -115,9 +179,8 @@ const Payment = () => {
           </div>
 
         </Grid>
-        <Grid item sx={12} md={6}>  <div className="mt-5">
-
-          <Grid>
+        <Grid item sx={12} md={6}>  
+          <div className="mt-5">  
             <Box className="d-flex-c pt-3">
               <button
                 onClick={(e) => setCouponState((e) => !e)}
@@ -162,14 +225,12 @@ const Payment = () => {
                   </p>
                 )}
               </div>
-            )}
-          </Grid>
-          <Grid>
+            )} 
             <form onSubmit={handleSubmit(onSubmit)}>
               <h4 className='mt-4 review_order_'>Contact info</h4>
               <div className='d-grid-s'>
-                <label>Company name<span className='required'>*</span></label>
-                <input className='input-filed' id={`${errors.company_email && 'border-red'}`} {...register("company_email", { required: true })} />
+                <label>Company Email<span className='required'>*</span></label>
+                <input className='input-filed' type='email' id={`${errors.company_email && 'border-red'}`} {...register("company_email", { required: true })} />
                 {errors.company_email && <span className='required'>This field is required</span>}
               </div>
 
@@ -190,8 +251,7 @@ const Payment = () => {
                   style={{
                     width: '100px',
                   }}
-                />
-
+                /> 
                 <Box className="w-full"></Box>
               </button>
 
@@ -227,9 +287,9 @@ const Payment = () => {
               </div>
             </form>
 
-
-          </Grid>
-        </div> </Grid>
+ 
+        </div> 
+        </Grid>
       </Grid>
     </Container>
   );

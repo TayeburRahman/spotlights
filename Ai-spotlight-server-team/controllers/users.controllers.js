@@ -13,6 +13,7 @@ const creatUsers = async (req, res) => {
     return res.send({ message: "User already exists" });
   }
   const result = await userModels.create(newUser);
+  console.log("result",result);
   res.send(result);
 };
 

@@ -1,13 +1,36 @@
 import Grid from '@mui/material/Grid';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
+import useToast from '../../hooks/useToast';
 
-const FromCheckout = () => {
+const FromCheckout = ({packages}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const navigate = useNavigate()
-    const onSubmit = () => { 
+    const loginUser = localStorage?.getItem('auth');
+    const user = JSON.parse(loginUser);
+ 
+    const { displayToast } = useToast();
+
+    if(!user){
+        displayToast({status:'error',message: 'Login account is required!'})
+        navigate('/')
+        return;
+    }
+
+    const navigate = useNavigate() 
+ 
+    const onSubmit = (data) => { 
+         
+         localStorage.setItem(
+            'order',
+            JSON.stringify({
+                checkout_details: data,
+                packages,
+                user,
+            }),
+          );
         navigate('/order/pay')
      };
+
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
